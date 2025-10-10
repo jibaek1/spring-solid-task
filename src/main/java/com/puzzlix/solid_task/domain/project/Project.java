@@ -1,10 +1,11 @@
 package com.puzzlix.solid_task.domain.project;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.puzzlix.solid_task.domain.issue.Issue;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -12,10 +13,15 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @ToString
+// 나는 FK 주인이 아니야
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String description;
+
+    @OneToMany(mappedBy = "project")
+    private List<Issue> issues = new ArrayList<>();
+
 }
