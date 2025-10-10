@@ -1,14 +1,10 @@
 package com.puzzlix.solid_task.domain.issue;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class Issue {
     private Long id;
     private String title;
