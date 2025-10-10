@@ -44,5 +44,4 @@ public class IssueController {
 
         return ResponseEntity.ok(CommonResponseDto.success(responseDtos));
     }
-
 }
