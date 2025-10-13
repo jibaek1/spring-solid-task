@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@ToString
+@ToString(exclude = {"issues"})
 // 나는 FK 주인이 아니야
 public class Project {
     @Id

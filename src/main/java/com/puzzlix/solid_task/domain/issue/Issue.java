@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@ToString
+@ToString(exclude = {"project", "reporter", "assignee", "commnets"})
 public class Issue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
