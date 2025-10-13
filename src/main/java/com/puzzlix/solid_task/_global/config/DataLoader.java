@@ -33,12 +33,6 @@ public class DataLoader implements CommandLineRunner {
         User testUser2 = userRepository.save(new User(null,"이순신",
                 "test1@naver.com","1234",new ArrayList<>()));
 
-        User testUser3 = userRepository.save(new User(null,"홍길동",
-                "test1@naver.com","1234",new ArrayList<>()));
-
-        User testUser4 = userRepository.save(new User(null,"홍길동",
-                "test1@naver.com","1234",new ArrayList<>()));
-
         Project testProject = projectRepository
                 .save(new Project(null,"SOLID Task 프로젝트","SOLID 개념 학습",new ArrayList<>()));
 
