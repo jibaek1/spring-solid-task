@@ -5,6 +5,7 @@ import com.puzzlix.solid_task.domain.issue.IssueRepository;
 import com.puzzlix.solid_task.domain.issue.IssueStatus;
 import com.puzzlix.solid_task.domain.project.Project;
 import com.puzzlix.solid_task.domain.project.ProjectRepository;
+import com.puzzlix.solid_task.domain.user.Role;
 import com.puzzlix.solid_task.domain.user.User;
 import com.puzzlix.solid_task.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,16 +30,16 @@ public class DataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         User testUser1 = userRepository.save(new User(null,"홍길동",
-                "test1@naver.com",passwordEncoder.encode("1234"),new ArrayList<>()));
+                "test1@naver.com",passwordEncoder.encode("1234"), Role.USER,new ArrayList<>()));
 
         User testUser2 = userRepository.save(new User(null,"이순신",
-                "test2@naver.com",passwordEncoder.encode("1234"),new ArrayList<>()));
+                "test2@naver.com",passwordEncoder.encode("1234"),Role.USER,new ArrayList<>()));
 
-        User testUser3 = userRepository.save(new User(null,"홍길동",
-                "test3@naver.com",passwordEncoder.encode("1234"),new ArrayList<>()));
+        User testUser3 = userRepository.save(new User(null,"관리자",
+                "test3@naver.com",passwordEncoder.encode("1234"),Role.ADMIN,new ArrayList<>()));
 
         User testUser4 = userRepository.save(new User(null,"홍길동",
-                "test4@naver.com",passwordEncoder.encode("1234"),new ArrayList<>()));
+                "test4@naver.com",passwordEncoder.encode("1234"),Role.USER,new ArrayList<>()));
 
         Project testProject = projectRepository
                 .save(new Project(null,"SOLID Task 프로젝트","SOLID 개념 학습",new ArrayList<>()));
