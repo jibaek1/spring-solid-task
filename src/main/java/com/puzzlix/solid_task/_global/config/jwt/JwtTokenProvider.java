@@ -79,7 +79,7 @@ public class JwtTokenProvider {
 
     public Role getRole(String token) {
         String roleStr = parseClaims(token).get("role",String.class);
-        return Role.valueOf(token);
+        return Role.valueOf(roleStr);
     }
 
     /**
