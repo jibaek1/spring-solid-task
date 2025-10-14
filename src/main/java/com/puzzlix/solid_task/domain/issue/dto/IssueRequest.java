@@ -16,5 +16,14 @@ public class IssueRequest {
         private Long reporterId;
     } // end of static inner class
 
-    // IssueRequest.Create dto = new IssueRequest.Create(...);
+    @Getter
+    @Setter
+    public static class Update {
+
+        private String title;
+        private String description;
+        private Long assigneeId;
+
+    }
+
 }

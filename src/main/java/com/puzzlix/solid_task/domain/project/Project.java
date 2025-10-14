@@ -23,5 +23,4 @@ public class Project {
 
     @OneToMany(mappedBy = "project")
     private List<Issue> issues = new ArrayList<>();
-
 }

@@ -51,6 +51,7 @@ public class JwtTokenProvider {
             Jwts.parser()
                     .verifyWith(key)
                     .build().parseSignedClaims(token);
+            return true;
         } catch (SecurityException | MalformedJwtException e) {
             log.error("잘못된 JWT 서명 입니다.", e);
         } catch (ExpiredJwtException e) {

@@ -18,13 +18,15 @@ public class JwtInterceptor implements HandlerInterceptor {
         // 1. 요청 메세지 헤더에서 키값 (Authorization) 헤더를 찾아 JWT 토큰을 추출
         // 2. 순수 토큰 추출해서
         String token = resolveToken(request);
+        System.out.println(token);
         if (token != null && jwtTokenProvider.validateToken(token)) {
             // 결과값이 true 라면 controller 로 보낸다.
             return true;
         }
 
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED,"유호하지 않은 토큰입니다");
-        return HandlerInterceptor.super.preHandle(request, response, handler);
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED,"유효하지 않은 토큰입니다");
+        return false;
+        // return HandlerInterceptor.super.preHandle(request, response, handler)
     }
 
     private String resolveToken(HttpServletRequest request) {
