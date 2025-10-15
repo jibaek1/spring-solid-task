@@ -42,7 +42,7 @@ public class DataLoader implements CommandLineRunner {
                 "test4@naver.com",passwordEncoder.encode("1234"),Role.USER,new ArrayList<>()));
 
         Project testProject = projectRepository
-                .save(new Project(null,"SOLID Task 프로젝트","SOLID 개념 학습",new ArrayList<>()));
+                .save(new Project(null,"SOLID Task 프로젝트","SOLID 개념 학습"));
 
         issueRepository.save(new Issue(null,"로그인 기능 구현 요청",
                 "JWT 필요", IssueStatus.TODO,testProject,testUser1,null,new ArrayList<>()));

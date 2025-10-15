@@ -20,7 +20,8 @@ public class IssueController {
 
     /**
      * 특정 이슈 상태 변경 API (담당자가 진행 변경 관리자도 진행 상태 변경)
-     *  주소 설계 - http://localhost:8080/api/issues/{id}/status
+     *  주소 설계 - http://localhost:8080/api/issues/{id}/status?=DONE
+     *  HTTP 메세지
      */
     @PatchMapping("/{id}/status")
     public ResponseEntity<?> updateIssueStatus(
@@ -29,10 +30,11 @@ public class IssueController {
             @RequestAttribute("userEmail") String userEmail,
             @RequestAttribute("userRole")Role userRole
     ) {
-       // 서비스 호출
        Issue issue = issueService.updateIssueStatus(issueId,newStatus,userEmail,userRole);
+        // 서비스 호출 -
+        IssueResponse.FindById responseDto = new IssueResponse.FindById(issue);
         return ResponseEntity.ok(CommonResponseDto
-                .success("...","이슈 상태가 성공적으로 변경 되었습니다."));
+                .success(responseDto,"이슈 상태가 성공적으로 변경 되었습니다."));
     }
 
     /**
