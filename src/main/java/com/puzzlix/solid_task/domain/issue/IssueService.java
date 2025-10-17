@@ -28,17 +28,18 @@ public class IssueService {
 
     private final ApplicationEventPublisher eventPublisher;
 
-    public Issue updateIssueStatus(Long issueId,IssueStatus status,String requestUserEmail,Role userRole) {
+    public Issue updateIssueStatus(Long issueId, IssueStatus status, String requestUserEmail, Role userRole) {
         // 인가 처리
         Issue issue = issueRepository.findById(issueId)
                 .orElseThrow(() -> new NoSuchElementException("해당 ID의 이슈를 찾을 수 없습니다"));
 
         // 관리자가 아니거나 담당자가 아니면 상태를 변경 못함
-        if (userRole != Role.ADMIN && issue.getAssignee().getEmail().equals(requestUserEmail)) {
+        if(userRole != Role.ADMIN && !issue.getAssignee().getEmail().equals(requestUserEmail)) {
             throw new SecurityException("이슈 상태를 변경할 권한이 없습니다");
         }
+        // 더티 체킹 사용
         issue.setIssueStatus(status);
-        if (status == IssueStatus.DONE) {
+        if(status == IssueStatus.DONE) {
             // 이벤트 발생 (방송)
             eventPublisher.publishEvent(new IssueStatusChangedEvent(issue));
         }

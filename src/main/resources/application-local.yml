@@ -10,7 +10,17 @@ spring:
     username: sa # H2 DB 기본 사용자 이름
     password: # 비밀번호는 없음
     driver-class-name: org.h2.Driver # H2 드라이버 지정
-
+  mail:
+    host: smtp.gmail.com            # 구글 SMTP 서버 주소
+    port: 587                       # 구글 SMTP 포트 번호
+    username: tngus000777@gmail.com # 사용자 이메일
+    password: riim wtcx egug cpdt   # 사용자 앱 비밀번호
+    properties:
+      mail:
+        smtp:                        # 사용자 인증 여부
+          auth: true                 # 이메일 전송 타임아웃 시간
+          starttls:
+            enable: true             # TLS를 통해 안전한 통신 사용 여부
   # ===================================================================
   # 2. H2 데이터베이스 콘솔 설정
   # 개발 중 DB 테이블과 데이터를 눈으로 직접 볼 수 있게 해주는 웹 콘솔 기능입니다.
@@ -48,4 +58,8 @@ jwt:
 notification:
   policy:
     # 이슈 상태가 DONE 으로 변경되었을 때 사용할 알림 타입 지정
-    on-status-done: SMS
+    on-status-done: EMAIL
+  default-email-to: tngus000777@gmail.com
+
+gmail:
+  from: no-reply@example.com

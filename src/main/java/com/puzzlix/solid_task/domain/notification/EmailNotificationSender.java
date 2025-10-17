@@ -1,14 +1,44 @@
 package com.puzzlix.solid_task.domain.notification;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
 @Component
-public class EmailNotificationSender implements NotificationSender{
+public class EmailNotificationSender implements NotificationSender {
+
+    private final JavaMailSender mailSender;
+
+    private final String fromAddress;
+    private final String defaultTo;
+
+    public EmailNotificationSender(
+            JavaMailSender mailSender,
+            @Value("${gmail.from:no-reply@example.com}") String fromAddress,
+            @Value("${notification.default-email-to:}") String defaultTo
+    ) {
+        this.mailSender = mailSender;
+        this.fromAddress = fromAddress;
+        this.defaultTo = defaultTo;
+    }
 
     @Override
     public void send(String message) {
-        // 이메일 외부 API 연동 기능 처리
-        System.out.println("[이메일 발송]" + message);
+
+        if (defaultTo == null || defaultTo.isBlank()) {
+            throw new IllegalArgumentException("notification.default-email-to 가 설정되지 않았습니다.");
+        }
+
+        // 심플 텍스트 메일(본문: message)
+        SimpleMailMessage mail = new SimpleMailMessage();
+        mail.setFrom(fromAddress);
+        mail.setTo(defaultTo);
+        mail.setSubject("[알림] 시스템 메시지");
+        mail.setText(message);
+
+        mailSender.send(mail);
+        System.out.println("[이메일 발송] to=" + defaultTo);
     }
 
     @Override
