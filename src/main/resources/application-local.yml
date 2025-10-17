@@ -30,6 +30,14 @@ spring:
       enabled: true # H2 콘솔 기능 활성화
       path: /h2-console # 브라우저에서 접속할 경로 http://localhost:8080/h2-console
 
+  mustache:
+    prefix: classpath:/templates/
+    suffix: .mustache
+    cache: false
+  mvc:
+    view:
+      prefix: /templates/
+      suffix: .mustache
   # ===================================================================
   # 3. JPA 및 Hibernate 설정
   # JPA가 데이터베이스와 어떻게 상호작용할지 상세 규칙을 정합니다.
@@ -63,3 +71,7 @@ notification:
 
 gmail:
   from: no-reply@example.com
+
+kakao:
+  client_id: 3840591c69c0814fdb56fafa548e995e
+  redirect_uri: http://localhost:8080/api/issues
